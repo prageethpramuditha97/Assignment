@@ -1,0 +1,15 @@
+.scrollbar
+{
+	height : 100vh;
+	overflow-y: scroll;
+}
+#main::-webkit-scrollbar
+{
+	width: 3px;
+}
+
+#main::-webkit-scrollbar-thumb
+{
+	border-radius: 20px;
+	background-color: black;
+}

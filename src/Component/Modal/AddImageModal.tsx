@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { post } from '../../api/api';
 import { useSelector , useDispatch } from 'react-redux';
 import { addImageToAlbum } from '../../Redux/imageSlice';
+import Unplash from '../Unplash';
 
 interface Album {
     id : number ;
@@ -45,7 +46,7 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
             <div className='mb-10'>
                 <button
                     className="text-gray-500 hover:text-gray-700 float-right"
@@ -54,7 +55,7 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                     ✕
                 </button>
             </div>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Enter The New Image</label>
                     <input
@@ -77,12 +78,14 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                     />
                 </div>
                 <button
-                    type="submit"
+                    type="button"
                     className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    onClick={() => handleSubmit}
                 >
                     Add Album Now
                 </button>
-            </form>
+                <Unplash/>
+            </div>
         </div>
     </div>
   );

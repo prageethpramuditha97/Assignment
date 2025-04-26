@@ -2,8 +2,7 @@ import FolderView from './Album_View_Types/FolderView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import TableView from './Album_View_Types/TableView';
-import Modal from './Modal/modal';
-import AddAlbumForm from './Modal/addAlbum';
+import AddAlbumModal from './Modal/AddAlbumModal';
 import { useState } from 'react';
 
 const Album = () => {
@@ -22,13 +21,11 @@ const Album = () => {
 
   return (
     <div>
-      <div className="flex justify-left mb-4 items-center gap-2">
-        <span className="text-sm text-gray-700">Folder View</span>
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" id="viewToggle" className="sr-only peer" onChange={() => toggleView()}/>
-          <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer dark:bg-gray-400 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-        </label>
-        <span className="text-sm text-gray-700">Table View</span>
+      <div className="p-3 w-full">
+        <select id="options" className="block p-2 w-full mt-1 rounded-md shadow-sm" onChange={toggleView}>
+          <option value="Folder">Folder View</option>
+          <option value="Table">Table View</option>
+        </select>
       </div>
       {view === 'Folder' ? <FolderView /> : <TableView />}
       <div className='p-3'>
@@ -39,10 +36,8 @@ const Album = () => {
             <span>Add Album</span>
         </button>
       </div>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-semibold mb-4">Fill the Form</h2>
-        <AddAlbumForm/>
-      </Modal>
+      <AddAlbumModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
+        
     </div>
   );
 };

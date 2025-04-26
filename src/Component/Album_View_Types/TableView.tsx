@@ -6,7 +6,6 @@ interface Album {
   Name : string;
 }
 
-
 const TableView = () => {
     const dispatch = useDispatch();
     const albums : Album[] = useSelector((state: any) => state.albums.albumList);
@@ -14,7 +13,7 @@ const TableView = () => {
 
     return (
       <div className="p-4">
-        <table className="min-w-full bg-white rounded-lg shadow-md">
+        <table className="min-w-full bg-white">
           <thead className="bg-gray-200 text-gray-700">
             <tr>
               <th className="px-6 py-3 text-left">ID</th>
@@ -23,7 +22,7 @@ const TableView = () => {
           </thead>
           <tbody className="text-gray-700">
             {albums.map((album) => (
-              <tr key={album.id} className={`cursor-pointer border-t ${selected == album.id ? 'bg-green-500' : ''}`} onClick={() => dispatch(setSelectedAlbum(album.id))}>
+              <tr key={album.id} className={`cursor-pointer border-t ${selected == album.id ? 'bg-green-300' : ''}`} onClick={() => dispatch(setSelectedAlbum(album.id))}>
                 <td className="px-6 py-4">{album.id}</td>
                 <td className="px-6 py-4">{album.Name}</td>
               </tr>

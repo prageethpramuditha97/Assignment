@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AddImageModal from './Modal/AddImageModal';
 
 interface Image {
   album_id: number;
@@ -11,13 +13,11 @@ const Gallary = () => {
   const selected : number = useSelector((state: any) => state.albums.selectedAlbumId);
   const images : Image [] = useSelector((state: any) => state.images.imageList);
   const filteredImages = images.filter((image) => image.album_id === selected);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   //Need to replace immedietly
   const handleAddImage = () => {
-    const newImage = prompt("Enter image URL:");
-    if (newImage) {
-      //setImages([...images, newImage]);
-    }
+    setIsModalOpen(true);
   };
 
   return (
@@ -30,13 +30,14 @@ const Gallary = () => {
           )) 
         }
 
-        {/* Add Image Box */}
         <div
           onClick={handleAddImage}
           className="flex items-center justify-center border-2 border-dashed border-gray-400 rounded cursor-pointer h-60 hover:bg-gray-100 transition"
         >
           <FontAwesomeIcon icon={faPlus} className="text-3xl text-gray-500" />
         </div>
+        
+        <AddImageModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
       </div>
   );
 };

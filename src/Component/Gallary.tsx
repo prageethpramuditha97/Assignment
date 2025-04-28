@@ -34,7 +34,6 @@ const Gallary = () => {
             <div key={index} className="border rounded overflow-hidden shadow">
               <img src={image.img} alt={`img-${index}`} className="w-full h-60 object-cover" />
               <div className='p-3'>
-                <h5>Name of the Shoe</h5>
               </div>
             </div>
           )) 

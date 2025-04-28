@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { post } from '../../api/api';
 import { useDispatch } from 'react-redux';
 import { addAlbum } from '../../Redux/albumSlice';
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 
 interface Album {
     id : number ;
@@ -12,6 +16,13 @@ interface AddAlbumModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const albumSchema = z.object({
+    albumName: z.string().min(1, "Album name is required"),
+});
+  
+type AlbumFormData = z.infer<typeof albumSchema>;
+
 
 const AddAlbumModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;

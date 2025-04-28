@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Image {
-    album_id: number;
-    img: string;
+  album_id: number;
+  img: string;
+  title : string;
+  date : string;
 }
 
 interface ImageState {

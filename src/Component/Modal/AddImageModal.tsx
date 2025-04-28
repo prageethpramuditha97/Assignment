@@ -12,6 +12,8 @@ interface Album {
 interface Image {
     album_id: number;
     img: string;
+    title : string;
+    date : string;
 }
 
 interface AddAlbumModalProps {
@@ -27,23 +29,33 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
     
   const selectAlbumName = currentAlbumList[selected-1].Name;
 
-  const [newImageName, setNewImageName] = useState("");
+  const [imgURL, setNewImageURL] = useState("");
+  const [imgTitle, setNewImageTitle] = useState("");
+  const [imgCreateDate, setNewImageCreateDate] = useState("");
   
   const dispatch = useDispatch();
   
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewImageName(e.target.value);
-  }
+    const handleImageTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewImageTitle(e.target.value);
+    }
+
+    const handleImageURLChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewImageURL(e.target.value);
+    };
+
+    const handleImageDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewImageCreateDate(e.target.value);
+    }
 
     const handleImageSrcChange = (newValue: string) => {
-        setNewImageName(newValue);
+        setNewImageURL(newValue);
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         const addNewImage = async () => {
             try {
-                await post<Image>('/api/images', {"album_id" : selected , "img" : newImageName});
-                dispatch(addImageToAlbum({"album_id" : selected , "img" : newImageName}));
+                await post<Image>('/api/images', {"album_id" : selected , "img" : imgURL});
+                dispatch(addImageToAlbum({"album_id" : selected , "img" : imgURL , "title" : "" , "date" : ""}));
                 onClose();
             } catch (error) {
                 console.error('Error posting string:', error);
@@ -79,12 +91,12 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                     </div>
                     <div className='w-2/4'>
                         <div className='ms-2'>
-                            <label className="block text-sm font-medium text-gray-700">Image</label>
+                            <label className="block text-sm font-medium text-gray-700">Image Title</label>
                             <input
                             type="text"
                             name="Album_Name"
-                            value={newImageName}
-                            onChange={handleImageChange}
+                            value={imgTitle}
+                            onChange={handleImageTitleChange}
                             className="mt-1 block w-full border border-gray-300 rounded-md p-2"
                             required
                             />
@@ -94,12 +106,12 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                 <div className='flex'>
                     <div className='w-2/4'>
                         <div className='me-2'>
-                            <label className="block text-sm font-medium text-gray-700">Image Title</label>
+                            <label className="block text-sm font-medium text-gray-700">Image</label>
                             <input
                             type="text"
                             name="Album_Name"
-                            value={newImageName}
-                            onChange={handleImageChange}
+                            value={imgURL}
+                            onChange={handleImageURLChange}
                             className="mt-1 block w-full border border-gray-300 rounded-md p-2"
                             required
                             />
@@ -109,10 +121,10 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                         <div className='ms-2'>
                             <label className="block text-sm font-medium text-gray-700">Created Date</label>
                             <input
-                            type="text"
+                            type="date"
                             name="Album_Name"
-                            value={newImageName}
-                            onChange={handleImageChange}
+                            value={imgCreateDate}
+                            onChange={handleImageDateChange}
                             className="mt-1 block w-full border border-gray-300 rounded-md p-2"
                             required
                             />

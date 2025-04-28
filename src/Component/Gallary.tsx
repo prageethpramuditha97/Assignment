@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,12 +9,19 @@ interface Image {
   img: string;
 }
 
+interface Album {
+  id : number ;
+  Name : string;
+}
+
+
 const Gallary = () => {
   const selected : number = useSelector((state: any) => state.albums.selectedAlbumId);
   const images : Image [] = useSelector((state: any) => state.images.imageList);
   const filteredImages = images.filter((image) => image.album_id === selected);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
+
   //Need to replace immedietly
   const handleAddImage = () => {
     setIsModalOpen(true);
@@ -26,6 +33,9 @@ const Gallary = () => {
           filteredImages.map((image, index) => (
             <div key={index} className="border rounded overflow-hidden shadow">
               <img src={image.img} alt={`img-${index}`} className="w-full h-60 object-cover" />
+              <div className='p-3'>
+                <h5>Name of the Shoe</h5>
+              </div>
             </div>
           )) 
         }

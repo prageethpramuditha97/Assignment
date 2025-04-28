@@ -4,7 +4,7 @@ Manage all axios requests
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 //This server is my peronal sever deployed on heroku
-const API_BASE_URL = 'http://localhost:8081/';
+const API_BASE_URL = 'https://officemanagement-01725a3093a3.herokuapp.com/';
 
 const api = axios.create({
   baseURL: API_BASE_URL,

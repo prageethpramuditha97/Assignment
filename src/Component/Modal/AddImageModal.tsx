@@ -67,7 +67,7 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                 <div className='flex'>
                     <div className='w-2/4'>
                         <div className='me-2'>
-                            <label className="block text-sm font-medium text-gray-700">Enter The New Image</label>
+                            <label className="block text-sm font-medium text-gray-700">Album Name</label>
                             <input
                             type="text"
                             name="Album_Id"
@@ -79,7 +79,7 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                     </div>
                     <div className='w-2/4'>
                         <div className='ms-2'>
-                            <label className="block text-sm font-medium text-gray-700">Enter The New Album Name</label>
+                            <label className="block text-sm font-medium text-gray-700">Image</label>
                             <input
                             type="text"
                             name="Album_Name"
@@ -94,7 +94,7 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                 <div className='flex'>
                     <div className='w-2/4'>
                         <div className='me-2'>
-                            <label className="block text-sm font-medium text-gray-700">Enter The Image Title</label>
+                            <label className="block text-sm font-medium text-gray-700">Image Title</label>
                             <input
                             type="text"
                             name="Album_Name"
@@ -107,7 +107,7 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                     </div>
                     <div className='w-2/4'>
                         <div className='ms-2'>
-                            <label className="block text-sm font-medium text-gray-700">Enter The Created Date</label>
+                            <label className="block text-sm font-medium text-gray-700">Created Date</label>
                             <input
                             type="text"
                             name="Album_Name"

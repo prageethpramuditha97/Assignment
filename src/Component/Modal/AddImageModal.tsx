@@ -51,7 +51,7 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
         setNewImageURL(newValue);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = () => {
         const addNewImage = async () => {
             try {
                 await post<Image>('/api/images', {"album_id" : selected , "img" : imgURL});

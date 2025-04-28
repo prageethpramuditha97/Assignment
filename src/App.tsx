@@ -15,6 +15,8 @@ interface Album {
 interface Image {
   album_id: number;
   img: string;
+  title : string;
+  date : string;
 }
 
 function App() {

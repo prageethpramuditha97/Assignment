@@ -41,6 +41,7 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
 
     const handleImageURLChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewImageURL(e.target.value);
+        alert(imgURL);
     };
 
     const handleImageDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +51,20 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
     const handleImageSrcChange = (newValue: string) => {
         setNewImageURL(newValue);
     };
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            try {
+                const imageUrl = await post<string>('/api/upload/images', new FormData().append('image', file));
+                setNewImageURL(imageUrl);
+            } catch (error) {
+                console.error('Error posting string:', error);
+            }
+          
+        }
+        
+      };
 
     const handleSubmit = () => {
         const addNewImage = async () => {
@@ -104,17 +119,34 @@ const AddImageModal: React.FC<AddAlbumModalProps> = ({ isOpen, onClose }) => {
                     </div>
                 </div>
                 <div className='flex'>
-                    <div className='w-2/4'>
-                        <div className='me-2'>
-                            <label className="block text-sm font-medium text-gray-700">Image</label>
+                    <div className='flex w-2/4'>
+                        <div className='w-3/4'>
+                            <div className='me-2'>
+                                <label className="block text-sm font-medium text-gray-700">Image</label>
+                                <input
+                                type="text"
+                                name="Album_Name"
+                                value={imgURL}
+                                onChange={handleImageURLChange}
+                                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                required
+                                />
+                            </div>
+                        </div>
+                        <div className='w-1/4'>
+                            <label htmlFor="fileInput" className="cursor-pointer inline-block border border-gray-400 text-black p-2 rounded mt-6">
+                                Upload
+                            </label>
+
+                            {/* Hidden input */}
                             <input
-                            type="text"
-                            name="Album_Name"
-                            value={imgURL}
-                            onChange={handleImageURLChange}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                            required
+                                id="fileInput"  // <-- same id as label's htmlFor
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={handleFileUpload}
                             />
+
                         </div>
                     </div>
                     <div className='w-2/4'>

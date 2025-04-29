@@ -27,9 +27,13 @@ type FormData = {
   
   // Define Zod schema
   const imageSchema = z.object({
-      imageName: z.string().min(1, "Image Name is required"),
-      createdDate: z.string().min(1, "Date is required"),
-      imgUrl: z.string().min(1, "Image URL is required"),
+    imageName: z.string().min(1, "Image Name is required"),
+
+    createdDate: z.string().min(1, "Created Date is required"),
+  
+    imgUrl: z
+      .string().min(1, "Image URL is required")
+      .url("Please enter a valid Image URL"),
   });
     
   // Infer TypeScript type from the Zod schema

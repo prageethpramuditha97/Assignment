@@ -20,7 +20,6 @@ const Gallary = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
 
-  //Need to replace immedietly
   const handleAddImage = () => {
     setIsModalOpen(true);
   };
@@ -32,6 +31,8 @@ const Gallary = () => {
             <div key={index} className="border rounded overflow-hidden shadow">
               <img src={image.img} alt={`img-${index}`} className="w-full h-60 object-cover" />
               <div className='p-3'>
+                <h6>{image.title}</h6>
+                <small className='text-gray-400'>{image.date}</small>
               </div>
             </div>
           )) 

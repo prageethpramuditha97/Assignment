@@ -51,6 +51,20 @@ const AddImageModal: React.FC<AddImageModalPorps> = ({ isOpen, onClose }) => {
         setValue("imgUrl", newValue);
     };
     
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            try {
+                const imageUrl = await post<string>('/api/upload/images', new FormData().append('image', file));
+                setValue("imgUrl", imageUrl);
+            } catch (error) {
+                console.error('Error posting string:', error);
+            }
+          
+        }
+        
+      };
+
     const onSubmit = async (data: FormData) => {
         try {
             await post<Image>('/api/images', {"album_id" : selected , "img" : data.imgUrl , "title" : data.imageName , "date" : data.createdDate });
@@ -136,6 +150,7 @@ const AddImageModal: React.FC<AddImageModalPorps> = ({ isOpen, onClose }) => {
                                     type="file"
                                     accept="image/*"
                                     className="hidden"
+                                    onChange={handleFileUpload}
                                 />
 
                             </div>
